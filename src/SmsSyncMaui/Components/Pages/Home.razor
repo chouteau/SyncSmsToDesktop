@@ -1,0 +1,214 @@
+@page "/"
+@using SmsSyncMaui.Models
+@using SmsSyncMaui.ViewModels
+@inject MainViewModel VM
+@inject Microsoft.JSInterop.IJSRuntime JS
+@implements IDisposable
+
+<div class="app-shell">
+
+    <!-- ── Status bar ── -->
+    <div class="status-bar @(VM.IsConnected ? "status-connected" : "status-disconnected")">
+        <span class="status-icon">@(VM.IsConnected ? "📱" : "🔌")</span>
+        <span class="status-text">@VM.StatusMessage</span>
+        <span class="server-ip">@VM.ServerIpPort</span>
+        <button class="btn-sync" @onclick="VM.RequestSync" title="Synchroniser">⟳</button>
+    </div>
+
+    <!-- ── Sync progress ── -->
+    @if (VM.IsSyncing)
+    {
+        <div class="sync-bar">
+            <div class="sync-fill" style="width:@(VM.SyncProgressValue)%"></div>
+        </div>
+        <div class="sync-label">@VM.SyncStatusText</div>
+    }
+
+    <!-- ── Main layout ── -->
+    <div class="main-layout">
+
+        <!-- Left panel: conversation list -->
+        <div class="conv-panel">
+            <div class="conv-panel-header">
+                <span>💬 Conversations</span>
+                <span class="conv-count">@VM.Conversations.Count</span>
+            </div>
+            <div class="conv-list">
+                @foreach (var conv in VM.Conversations)
+                {
+                    <div class="conv-item @(conv == VM.SelectedConversation ? "selected" : "")"
+                         @onclick="() => SelectConversation(conv)">
+                        <div class="conv-avatar @(conv.IsFavorite ? "avatar-fav" : "")">
+                            @GetInitials(conv.DisplayName)
+                        </div>
+                        <div class="conv-info">
+                            <div class="conv-name">
+                                @if (conv.IsFavorite)
+                                {
+                                    <span class="fav-star">★</span>
+                                }
+                                @conv.DisplayName
+                            </div>
+                            <div class="conv-preview">@conv.LatestMessage</div>
+                        </div>
+                        <div class="conv-time">@conv.FormattedLatestMessageTime</div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right panel: message thread -->
+        <div class="chat-panel">
+            @if (VM.SelectedConversation == null)
+            {
+                <div class="chat-empty">
+                    <div class="chat-empty-icon">💬</div>
+                    <div class="chat-empty-text">Sélectionnez une conversation</div>
+                </div>
+            }
+            else
+            {
+                <div class="chat-header">
+                    <div class="chat-avatar @(VM.SelectedConversation.IsFavorite ? "avatar-fav" : "")">
+                        @GetInitials(VM.SelectedConversation.DisplayName)
+                    </div>
+                    <div class="chat-contact">
+                        <div class="chat-name">@VM.SelectedConversation.DisplayName</div>
+                        <div class="chat-address">@VM.SelectedConversation.Address</div>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="messages-scroll">
+                    @{
+                        string? lastDate = null;
+                    }
+                    @foreach (var msg in VM.SelectedConversation.Messages)
+                    {
+                        var dateLabel = msg.LocalDateTime.ToString("dddd d MMMM yyyy");
+                        if (dateLabel != lastDate)
+                        {
+                            lastDate = dateLabel;
+                            <div class="date-separator"><span>@dateLabel</span></div>
+                        }
+
+                        bool sent = msg.Type == 2;
+                        <div class="msg-row @(sent ? "msg-sent" : "msg-received")">
+                            <div class="msg-container">
+                                <button class="btn-delete-msg" @onclick="() => VM.DeleteMessageAsync(msg.Id)" title="Supprimer ce message">🗑️</button>
+                                <div class="msg-bubble @(sent ? "bubble-sent" : "bubble-received")">
+                                    @if (!string.IsNullOrEmpty(msg.AttachmentBase64))
+                                    {
+                                        <div class="msg-attachment">
+                                            <img class="attachment-image" src="data:@(msg.AttachmentMimeType ?? "image/jpeg");base64,@msg.AttachmentBase64" alt="MMS Attachment" />
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(msg.Body) && (msg.Body != "Photo" || string.IsNullOrEmpty(msg.AttachmentBase64)))
+                                    {
+                                        <div class="msg-body">@msg.Body</div>
+                                    }
+                                    <div class="msg-meta">
+                                        <span class="msg-time">@msg.FormattedTime</span>
+                                        @if (sent)
+                                        {
+                                            <span class="msg-status" title="@(msg.IsSynced ? "Envoyé" : "En attente")">
+                                                @(msg.IsSynced ? "✓✓" : "✓")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="chat-input-row">
+                    <textarea class="chat-input"
+                              rows="1"
+                              placeholder="Écrire un message..."
+                              @bind="VM.NewMessageText"
+                              @onkeydown="OnKeyDown"></textarea>
+                    <button class="btn-send"
+                            @onclick="SendMessage"
+                            disabled="@(string.IsNullOrWhiteSpace(VM.NewMessageText) || !VM.IsConnected)">
+                        ➤
+                    </button>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        VM.StateChanged += OnStateChanged;
+    }
+
+    public void Dispose()
+    {
+        VM.StateChanged -= OnStateChanged;
+    }
+
+    private void OnStateChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void SelectConversation(Conversation conv)
+    {
+        VM.SelectedConversation = conv;
+    }
+
+    private async Task SendMessage()
+    {
+        await VM.SendMessageAsync();
+        await ScrollToBottom();
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey && VM.IsConnected)
+        {
+            await SendMessage();
+        }
+    }
+
+    private Conversation? _lastSelectedConversation;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (VM.SelectedConversation != _lastSelectedConversation)
+        {
+            _lastSelectedConversation = VM.SelectedConversation;
+            if (VM.SelectedConversation != null)
+            {
+                await ScrollToBottom();
+            }
+        }
+    }
+
+    private async Task ScrollToBottom()
+    {
+        try
+        {
+            await Task.Delay(50); // brief yield for DOM update
+            await JS.InvokeVoidAsync("eval", "var el = document.getElementById('messages-scroll'); if (el) el.scrollTop = el.scrollHeight;");
+        }
+        catch { }
+    }
+
+    private static string GetInitials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return "?";
+        }
+        var parts = name.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length >= 2)
+        {
+            return $"{parts[0][0]}{parts[1][0]}".ToUpperInvariant();
+        }
+        return name[0].ToString().ToUpperInvariant();
+    }
+}

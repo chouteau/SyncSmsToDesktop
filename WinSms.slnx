@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/SmsSyncMaui/SmsSyncMaui.csproj" />
+  <Project Path="src/SmsSyncWindows/SmsSyncWindows.csproj" />
+</Solution>

@@ -1,0 +1,348 @@
+Xaml Unhandled Exception:
+Watson websocket server is not running.
+System.InvalidOperationException: Watson websocket server is not running.
+   at WatsonWebsocket.WatsonWsServer.Stop()
+   at SmsSyncWindows.Services.WebSocketServerManager.Stop()
+   at SmsSyncWindows.ViewModels.MainPageViewModel.Cleanup()
+   at SmsSyncWindows.MainPage.MainPage_Unloaded(Object sender, RoutedEventArgs e)
+   at WinRT._EventSource_global__Microsoft_UI_Xaml_RoutedEventHandler.EventState.<GetEventInvoke>b__1_0(Object sender, RoutedEventArgs e)
+   at ABI.Microsoft.UI.Xaml.RoutedEventHandler.Do_Abi_Invoke(IntPtr thisPtr, IntPtr sender, IntPtr e)[22:20:48] Message WebSocket reçu (47 caractères)
+[22:20:48] Type de message: connect
+[22:20:49] Message WebSocket reçu (41869 caractères)
+[22:20:49] Type de message: sms_history
+[22:20:49] Reçu 200 messages d'historique.
+[22:20:49] Erreur lors de la sauvegarde en base: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'NOT NULL constraint failed: Messages.ContactName'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__114_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at SmsSyncWindows.Services.WebSocketServerManager.SaveMessagesToDb(List`1 messages) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 365
+[22:20:49] Erreur de traitement du message WebSocket: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'NOT NULL constraint failed: Messages.ContactName'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__114_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at SmsSyncWindows.Services.WebSocketServerManager.SaveMessagesToDb(List`1 messages) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 365
+   at SmsSyncWindows.Services.WebSocketServerManager.OnMessageReceived(String messageJson) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 239
+[22:21:53] Message WebSocket reçu (47 caractères)
+[22:21:53] Type de message: connect
+[22:21:54] Message WebSocket reçu (41869 caractères)
+[22:21:54] Type de message: sms_history
+[22:21:54] Reçu 200 messages d'historique.
+[22:21:54] Historique sauvegardé avec succès.
+[22:23:27] Message WebSocket reçu (47 caractères)
+[22:23:27] Type de message: connect
+[22:23:28] Message WebSocket reçu (41869 caractères)
+[22:23:28] Type de message: sms_history
+[22:23:28] Reçu 200 messages d'historique.
+[22:23:28] Historique sauvegardé avec succès.
+[22:25:23] Message WebSocket reçu (41869 caractères)
+[22:25:23] Type de message: sms_history
+[22:25:23] Reçu 200 messages d'historique.
+[22:25:23] Historique sauvegardé avec succès.
+[22:31:10] Exception dans HandleClientAsync: System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake.
+ ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at SmsSyncWindows.Services.WebSocketServerManager.HandleClientAsync(TcpClient client, CancellationToken token) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 148
+[22:31:20] Message WebSocket reçu (47 caractères)
+[22:31:20] Type de message: connect
+[22:31:21] Message WebSocket reçu (322885 caractères)
+[22:31:21] Type de message: sms_history
+[22:31:21] Reçu 1500 messages d'historique.
+[22:31:21] Historique sauvegardé avec succès.
+[22:32:27] Message WebSocket reçu (47 caractères)
+[22:32:27] Type de message: connect
+[22:32:28] Message WebSocket reçu (322885 caractères)
+[22:32:28] Type de message: sms_history
+[22:32:28] Reçu 1500 messages d'historique.
+[22:32:29] Historique sauvegardé avec succès.
+[22:32:51] Message WebSocket reçu (134 caractères)
+[22:32:51] Type de message: send_sms_status
+[22:32:51] Reçu statut envoi pour cd7f6221-813e-45f5-9a82-96dc6b3c612b: Success=True.
+[22:37:19] Exception dans HandleClientAsync: System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake.
+ ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at SmsSyncWindows.Services.WebSocketServerManager.HandleClientAsync(TcpClient client, CancellationToken token) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 148
+[22:38:25] Message WebSocket reçu (47 caractères)
+[22:38:25] Type de message: connect
+[22:38:25] Message WebSocket reçu (322698 caractères)
+[22:38:25] Type de message: sms_history
+[22:38:25] Reçu 1500 messages d'historique.
+[22:38:26] Historique sauvegardé avec succès.
+[22:38:26] Message WebSocket reçu (1329 caractères)
+[22:38:26] Type de message: favorite_contacts
+[22:38:26] Reçu 21 contacts favoris.
+[22:39:16] Message WebSocket reçu (47 caractères)
+[22:39:16] Type de message: connect
+[22:39:17] Message WebSocket reçu (322698 caractères)
+[22:39:17] Type de message: sms_history
+[22:39:17] Reçu 1500 messages d'historique.
+[22:39:17] Historique sauvegardé avec succès.
+[22:39:17] Message WebSocket reçu (1329 caractères)
+[22:39:17] Type de message: favorite_contacts
+[22:39:17] Reçu 21 contacts favoris.
+[22:43:08] Exception dans HandleClientAsync: System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake.
+ ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at SmsSyncWindows.Services.WebSocketServerManager.HandleClientAsync(TcpClient client, CancellationToken token) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 149
+[22:45:33] Message WebSocket reçu (47 caractères)
+[22:45:33] Type de message: connect
+[22:45:34] Message WebSocket reçu (322698 caractères)
+[22:45:34] Type de message: sms_history
+[22:45:34] Reçu 1500 messages d'historique.
+[22:45:34] Historique sauvegardé avec succès.
+[22:45:34] Message WebSocket reçu (1329 caractères)
+[22:45:34] Type de message: favorite_contacts
+[22:45:34] Reçu 21 contacts favoris.
+[22:55:45] Message WebSocket reçu (47 caractères)
+[22:55:45] Type de message: connect
+[22:55:45] Message WebSocket reçu (50 caractères)
+[22:55:45] Type de message: sync_start
+[22:55:45] Synchro démarrée. Total attendu : 1711
+[22:55:45] Message WebSocket reçu (110719 caractères)
+[22:55:45] Type de message: sms_history
+[22:55:45] Reçu 500 messages d'historique.
+[22:55:45] Historique sauvegardé avec succès.
+[22:55:45] Message WebSocket reçu (69 caractères)
+[22:55:45] Type de message: sync_progress
+[22:55:45] Synchro progression : 500 / 1711
+[22:55:45] Message WebSocket reçu (106763 caractères)
+[22:55:45] Type de message: sms_history
+[22:55:45] Reçu 500 messages d'historique.
+[22:55:46] Historique sauvegardé avec succès.
+[22:55:46] Message WebSocket reçu (70 caractères)
+[22:55:46] Type de message: sync_progress
+[22:55:46] Synchro progression : 1000 / 1711
+[22:55:46] Message WebSocket reçu (105288 caractères)
+[22:55:46] Type de message: sms_history
+[22:55:46] Reçu 500 messages d'historique.
+[22:55:46] Historique sauvegardé avec succès.
+[22:55:46] Message WebSocket reçu (70 caractères)
+[22:55:46] Type de message: sync_progress
+[22:55:46] Synchro progression : 1500 / 1711
+[22:55:46] Message WebSocket reçu (45623 caractères)
+[22:55:46] Type de message: sms_history
+[22:55:46] Reçu 211 messages d'historique.
+[22:55:46] Historique sauvegardé avec succès.
+[22:55:46] Message WebSocket reçu (70 caractères)
+[22:55:46] Type de message: sync_progress
+[22:55:46] Synchro progression : 1711 / 1711
+[22:55:46] Message WebSocket reçu (32 caractères)
+[22:55:46] Type de message: sync_end
+[22:55:46] Synchro terminée.
+[22:55:46] Message WebSocket reçu (1329 caractères)
+[22:55:46] Type de message: favorite_contacts
+[22:55:46] Reçu 21 contacts favoris.
+[22:59:08] Message WebSocket reçu (50 caractères)
+[22:59:08] Type de message: sync_start
+[22:59:08] Synchro démarrée. Total attendu : 1711
+[22:59:08] Message WebSocket reçu (110719 caractères)
+[22:59:08] Type de message: sms_history
+[22:59:08] Reçu 500 messages d'historique.
+[22:59:08] Historique sauvegardé avec succès.
+[22:59:08] Message WebSocket reçu (69 caractères)
+[22:59:08] Type de message: sync_progress
+[22:59:08] Synchro progression : 500 / 1711
+[22:59:08] Message WebSocket reçu (106763 caractères)
+[22:59:08] Type de message: sms_history
+[22:59:08] Reçu 500 messages d'historique.
+[22:59:09] Historique sauvegardé avec succès.
+[22:59:09] Message WebSocket reçu (70 caractères)
+[22:59:09] Type de message: sync_progress
+[22:59:09] Synchro progression : 1000 / 1711
+[22:59:09] Message WebSocket reçu (105288 caractères)
+[22:59:09] Type de message: sms_history
+[22:59:09] Reçu 500 messages d'historique.
+[22:59:09] Historique sauvegardé avec succès.
+[22:59:09] Message WebSocket reçu (70 caractères)
+[22:59:09] Type de message: sync_progress
+[22:59:09] Synchro progression : 1500 / 1711
+[22:59:09] Message WebSocket reçu (45623 caractères)
+[22:59:09] Type de message: sms_history
+[22:59:09] Reçu 211 messages d'historique.
+[22:59:09] Historique sauvegardé avec succès.
+[22:59:09] Message WebSocket reçu (70 caractères)
+[22:59:09] Type de message: sync_progress
+[22:59:09] Synchro progression : 1711 / 1711
+[22:59:09] Message WebSocket reçu (32 caractères)
+[22:59:09] Type de message: sync_end
+[22:59:09] Synchro terminée.
+[22:59:09] Message WebSocket reçu (1329 caractères)
+[22:59:09] Type de message: favorite_contacts
+[22:59:09] Reçu 21 contacts favoris.
+[22:59:16] Message WebSocket reçu (50 caractères)
+[22:59:16] Type de message: sync_start
+[22:59:16] Synchro démarrée. Total attendu : 1711
+[22:59:17] Message WebSocket reçu (110719 caractères)
+[22:59:17] Type de message: sms_history
+[22:59:17] Reçu 500 messages d'historique.
+[22:59:17] Historique sauvegardé avec succès.
+[22:59:17] Message WebSocket reçu (69 caractères)
+[22:59:17] Type de message: sync_progress
+[22:59:17] Synchro progression : 500 / 1711
+[22:59:17] Message WebSocket reçu (106763 caractères)
+[22:59:17] Type de message: sms_history
+[22:59:17] Reçu 500 messages d'historique.
+[22:59:17] Historique sauvegardé avec succès.
+[22:59:17] Message WebSocket reçu (70 caractères)
+[22:59:17] Type de message: sync_progress
+[22:59:17] Synchro progression : 1000 / 1711
+[22:59:17] Message WebSocket reçu (105288 caractères)
+[22:59:17] Type de message: sms_history
+[22:59:17] Reçu 500 messages d'historique.
+[22:59:17] Historique sauvegardé avec succès.
+[22:59:17] Message WebSocket reçu (70 caractères)
+[22:59:17] Type de message: sync_progress
+[22:59:17] Synchro progression : 1500 / 1711
+[22:59:18] Message WebSocket reçu (45623 caractères)
+[22:59:18] Type de message: sms_history
+[22:59:18] Reçu 211 messages d'historique.
+[22:59:18] Historique sauvegardé avec succès.
+[22:59:18] Message WebSocket reçu (70 caractères)
+[22:59:18] Type de message: sync_progress
+[22:59:18] Synchro progression : 1711 / 1711
+[22:59:18] Message WebSocket reçu (32 caractères)
+[22:59:18] Type de message: sync_end
+[22:59:18] Synchro terminée.
+[22:59:18] Message WebSocket reçu (1329 caractères)
+[22:59:18] Type de message: favorite_contacts
+[22:59:18] Reçu 21 contacts favoris.
+[23:01:44] Message WebSocket reçu (298 caractères)
+[23:01:44] Type de message: new_sms
+[23:01:44] Reçu nouveau SMS de +33682223654.
+[23:01:44] Nouveau SMS sauvegardé.
+[23:02:46] Message WebSocket reçu (266 caractères)
+[23:02:46] Type de message: new_sms
+[23:02:46] Reçu nouveau SMS de +33682223654.
+[23:02:46] Nouveau SMS sauvegardé.
+[23:04:15] Exception dans HandleClientAsync: System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at SmsSyncWindows.Services.WebSocketServerManager.HandleClientAsync(TcpClient client, CancellationToken token) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 152
+[23:07:52] Message WebSocket reçu (47 caractères)
+[23:07:52] Type de message: connect
+[23:07:52] Message WebSocket reçu (50 caractères)
+[23:07:52] Type de message: sync_start
+[23:07:52] Synchro démarrée. Total attendu : 1713
+[23:07:53] Message WebSocket reçu (110734 caractères)
+[23:07:53] Type de message: sms_history
+[23:07:53] Reçu 500 messages d'historique.
+[23:07:53] Historique sauvegardé avec succès.
+[23:07:53] Message WebSocket reçu (69 caractères)
+[23:07:53] Type de message: sync_progress
+[23:07:53] Synchro progression : 500 / 1713
+[23:07:53] Message WebSocket reçu (106814 caractères)
+[23:07:53] Type de message: sms_history
+[23:07:53] Reçu 500 messages d'historique.
+[23:07:53] Historique sauvegardé avec succès.
+[23:07:53] Message WebSocket reçu (70 caractères)
+[23:07:53] Type de message: sync_progress
+[23:07:53] Synchro progression : 1000 / 1713
+[23:07:54] Message WebSocket reçu (105258 caractères)
+[23:07:54] Type de message: sms_history
+[23:07:54] Reçu 500 messages d'historique.
+[23:07:54] Historique sauvegardé avec succès.
+[23:07:54] Message WebSocket reçu (70 caractères)
+[23:07:54] Type de message: sync_progress
+[23:07:54] Synchro progression : 1500 / 1713
+[23:07:54] Message WebSocket reçu (46035 caractères)
+[23:07:54] Type de message: sms_history
+[23:07:54] Reçu 213 messages d'historique.
+[23:07:54] Historique sauvegardé avec succès.
+[23:07:54] Message WebSocket reçu (70 caractères)
+[23:07:54] Type de message: sync_progress
+[23:07:54] Synchro progression : 1713 / 1713
+[23:07:54] Message WebSocket reçu (32 caractères)
+[23:07:54] Type de message: sync_end
+[23:07:54] Synchro terminée.
+[23:07:54] Message WebSocket reçu (1329 caractères)
+[23:07:54] Type de message: favorite_contacts
+[23:07:54] Reçu 21 contacts favoris.
+[23:08:55] Exception dans HandleClientAsync: System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+   at System.IO.Stream.ReadAtLeastAsyncCore(Memory`1 buffer, Int32 minimumBytes, Boolean throwOnEndOfStream, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.EnsureBufferContainsAsync(Int32 minimumRequiredBytes, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at SmsSyncWindows.Services.WebSocketServerManager.HandleClientAsync(TcpClient client, CancellationToken token) in E:\Labs\WinSms\SmsSyncWindows\Services\WebSocketServerManager.cs:line 152

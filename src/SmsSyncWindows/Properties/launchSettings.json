@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SmsSyncWindows (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "SmsSyncWindows (Package)": {
+      "commandName": "MsixPackage"
+    }
+  }
+}
