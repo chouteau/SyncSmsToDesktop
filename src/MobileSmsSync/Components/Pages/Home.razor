@@ -1,0 +1,143 @@
+@page "/"
+@using MobileSmsSync.ViewModels
+@inject MainViewModel VM
+@implements IDisposable
+
+<div class="glass-container">
+    <!-- Animated background glowing blobs -->
+    <div class="blob blob-purple"></div>
+    <div class="blob blob-cyan"></div>
+
+    <div class="app-card">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-wrapper">
+                <span class="logo-icon">📱</span>
+            </div>
+            <h1 class="app-title">Mobile SMS Sync</h1>
+            <p class="app-subtitle">Synchronisez vos SMS avec votre PC en temps réel</p>
+        </header>
+
+        <!-- Connection Status -->
+        <div class="status-badge-container">
+            <span class="status-badge @(VM.IsConnected ? "connected" : "disconnected")">
+                <span class="status-dot"></span>
+                @(VM.IsConnected ? "Connecté au PC" : "Déconnecté")
+            </span>
+        </div>
+
+        <!-- Log / Info Message -->
+        <div class="log-panel @(VM.IsConnected ? "log-success" : "")">
+            <span class="log-icon">ℹ️</span>
+            <span class="log-text">@VM.StatusMessage</span>
+        </div>
+
+        @if (!VM.IsSmsSupported)
+        {
+            <!-- iOS Platform Warning -->
+            <div class="platform-alert ios-alert">
+                <div class="alert-header">
+                    <span class="alert-icon">🍎</span>
+                    <h3 class="alert-title">Restrictions Apple iOS</h3>
+                </div>
+                <p class="alert-desc">
+                    Apple n'autorise pas l'accès d'arrière-plan aux messages SMS, MMS ou aux notifications système sur iOS. 
+                    Cette application peut fonctionner sur Android, mais est limitée sur iOS pour des raisons de sécurité imposées par Apple.
+                </p>
+            </div>
+        }
+        else
+        {
+            <!-- Configuration Form -->
+            <div class="section-card">
+                <h2 class="section-title">Connexion locale</h2>
+                <div class="input-group">
+                    <label for="ip-address" class="input-label">Adresse IP & Port du PC</label>
+                    <input id="ip-address" 
+                           type="text" 
+                           class="ip-input" 
+                           placeholder="Ex: 192.168.1.50:8888" 
+                           @bind="VM.IpAddress" 
+                           disabled="@VM.IsConnected" />
+                </div>
+                <p class="input-tip">Saisissez l'adresse réseau affichée sur l'application de bureau Windows.</p>
+                
+                <div class="action-wrapper">
+                    @if (!VM.IsConnected)
+                    {
+                        <button class="btn-action btn-start" @onclick="VM.StartSync">
+                            <span class="btn-icon">⚡</span> Démarrer la Synchronisation
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn-action btn-stop" @onclick="VM.StopSync">
+                            <span class="btn-icon">🛑</span> Arrêter la Synchronisation
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <!-- Permissions Dashboard -->
+            <div class="section-card">
+                <h2 class="section-title">État des Permissions</h2>
+                <ul class="permission-list">
+                    <li class="permission-item">
+                        <span class="perm-icon @(VM.AreSmsPermissionsGranted ? "granted" : "denied")">
+                            @(VM.AreSmsPermissionsGranted ? "✓" : "⚠")
+                        </span>
+                        <div class="perm-info">
+                            <span class="perm-name">Permissions SMS & Contacts</span>
+                            <span class="perm-desc">Requis pour lire, envoyer et lister les contacts favoris.</span>
+                        </div>
+                        @if (!VM.AreSmsPermissionsGranted)
+                        {
+                            <button class="btn-grant" @onclick="VM.RequestPermissionsAsync">Accorder</button>
+                        }
+                    </li>
+                    <li class="permission-item">
+                        <span class="perm-icon @(VM.IsNotificationAccessGranted ? "granted" : "denied")">
+                            @(VM.IsNotificationAccessGranted ? "✓" : "⚠")
+                        </span>
+                        <div class="perm-info">
+                            <span class="perm-name">Accès aux notifications</span>
+                            <span class="perm-desc">Requis pour intercepter les messages RCS (Google Messages) en direct.</span>
+                        </div>
+                        @if (!VM.IsNotificationAccessGranted)
+                        {
+                            <button class="btn-grant" @onclick="VM.OpenNotificationSettings">Activer</button>
+                        }
+                    </li>
+                </ul>
+            </div>
+        }
+        
+        <footer class="app-footer">
+            <p>Les deux appareils doivent être connectés au même réseau Wi-Fi local.</p>
+        </footer>
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        VM.PropertyChanged += OnPropertyChanged;
+        MainViewModel.StateChanged += OnStateChanged;
+    }
+
+    public void Dispose()
+    {
+        VM.PropertyChanged -= OnPropertyChanged;
+        MainViewModel.StateChanged -= OnStateChanged;
+    }
+
+    private void OnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnStateChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+}
