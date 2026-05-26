@@ -47,10 +47,10 @@ graph TD
 
 Le dépôt contient plusieurs projets adaptés à différents environnements technologiques :
 
-*   [**`src/SmsSyncWindows`**](file:///e:/S5/chouteau/SyncSmsToDesktop/src/SmsSyncWindows) : Application de bureau native **WinUI 3** (Windows App SDK) écrite en C#/.NET 10. Elle héberge le serveur WebSocket et gère l'affichage moderne des conversations avec une base de données SQLite locale.
-*   [**`src/SmsSyncAndroid`**](file:///e:/S5/chouteau/SyncSmsToDesktop/src/SmsSyncAndroid) : Client mobile natif **Android** écrit en **Kotlin**. Il implémente un *Foreground Service* robuste pour maintenir la connexion en arrière-plan et intercepte les SMS entrants.
-*   [**`src/SmsSyncMaui`**](file:///e:/S5/chouteau/SyncSmsToDesktop/src/SmsSyncMaui) : Version multiplateforme du projet en **.NET MAUI / Blazor Hybrid** ciblant Android, iOS, Mac Catalyst et Windows (WinUI 3).
-*   [**`src/MobileSmsSync`**](file:///e:/S5/chouteau/SyncSmsToDesktop/src/MobileSmsSync) : Client mobile **.NET MAUI / Blazor Hybrid** restreint aux plateformes Android et iOS.
+*   [**`src/SmsSyncWindows`**](src/SmsSyncWindows) : Application de bureau native **WinUI 3** (Windows App SDK) écrite en C#/.NET 10. Elle héberge le serveur WebSocket et gère l'affichage moderne des conversations avec une base de données SQLite locale.
+*   [**`src/SmsSyncAndroid`**](src/SmsSyncAndroid) : Client mobile natif **Android** écrit en **Kotlin**. Il implémente un *Foreground Service* robuste pour maintenir la connexion en arrière-plan et intercepte les SMS entrants.
+*   [**`src/SmsSyncMaui`**](src/SmsSyncMaui) : Version multiplateforme du projet en **.NET MAUI / Blazor Hybrid** ciblant Android, iOS, Mac Catalyst et Windows (WinUI 3).
+*   [**`src/MobileSmsSync`**](src/MobileSmsSync) : Client mobile **.NET MAUI / Blazor Hybrid** restreint aux plateformes Android et iOS.
 
 ---
 
@@ -66,10 +66,10 @@ Le dépôt contient plusieurs projets adaptés à différents environnements tec
 
 ### 2. Démarrage de l'application Bureau (PC)
 
-Vous pouvez exécuter le serveur WebSocket via Visual Studio (en ouvrant le fichier de solution [WinSms.slnx](file:///e:/S5/chouteau/SyncSmsToDesktop/WinSms.slnx)) ou via la console .NET :
+Vous pouvez exécuter le serveur WebSocket via Visual Studio (en ouvrant le fichier de solution [WinSms.slnx](WinSms.slnx)) ou via la console .NET :
 
 #### En ligne de commande .NET CLI :
-1. Ouvrez une invite PowerShell dans le dossier [src/SmsSyncWindows](file:///e:/S5/chouteau/SyncSmsToDesktop/src/SmsSyncWindows).
+1. Ouvrez une invite PowerShell dans le dossier [src/SmsSyncWindows](src/SmsSyncWindows).
 2. Détectez automatiquement votre architecture et lancez l'application :
    ```powershell
    $arch = $env:PROCESSOR_ARCHITECTURE
@@ -80,15 +80,15 @@ Vous pouvez exécuter le serveur WebSocket via Visual Studio (en ouvrant le fich
 
 > [!TIP]
 > Des scripts de compilation et de publication préconfigurés pour Windows sont disponibles à la racine :
-> - [publish-windows.cmd](file:///e:/S5/chouteau/SyncSmsToDesktop/publish-windows.cmd)
-> - [publish-windows-self-contained.cmd](file:///e:/S5/chouteau/SyncSmsToDesktop/publish-windows-self-contained.cmd)
+> - [publish-windows.cmd](publish-windows.cmd)
+> - [publish-windows-self-contained.cmd](publish-windows-self-contained.cmd)
 
 ---
 
 ### 3. Installation et configuration du Client Mobile (Téléphone)
 
 #### Option A : Client natif Android (`SmsSyncAndroid`)
-1. Ouvrez le dossier [src/SmsSyncAndroid](file:///e:/S5/chouteau/SyncSmsToDesktop/src/SmsSyncAndroid) avec **Android Studio**.
+1. Ouvrez le dossier [src/SmsSyncAndroid](src/SmsSyncAndroid) avec **Android Studio**.
 2. Compilez et installez l'application sur votre smartphone Android (via débogage USB ou en générant l'APK).
 3. Ouvrez l'application et **accordez les permissions demandées** :
     *   Lecture et réception de SMS (`READ_SMS`, `RECEIVE_SMS`)
@@ -145,4 +145,4 @@ La communication s'effectue en envoyant des trames de texte structurées en JSON
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Pour plus d'informations, veuillez vous référer au fichier [LICENSE](file:///e:/S5/chouteau/SyncSmsToDesktop/LICENSE).
+Ce projet est sous licence MIT. Pour plus d'informations, veuillez vous référer au fichier [LICENSE](LICENSE).
