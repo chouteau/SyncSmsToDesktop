@@ -1,4 +1,6 @@
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+
 using SmsSyncMaui.ViewModels;
 #if WINDOWS
 using Microsoft.Maui.LifecycleEvents;
