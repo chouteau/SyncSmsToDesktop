@@ -47,7 +47,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.5rem;
+    padding: 0.8rem;
     overflow: hidden;
 }
 
@@ -99,11 +99,11 @@ html, body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    padding: 2.5rem 2rem;
+    padding: 1.5rem 1.2rem;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.2rem;
 }
 
 /* Header styling */
@@ -265,6 +265,7 @@ html, body {
 }
 
 .ip-input {
+    width: 100%;
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -353,11 +354,13 @@ html, body {
 .permission-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.8rem;
     background: rgba(0, 0, 0, 0.15);
     padding: 0.75rem 1rem;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.02);
+    width: 100%;
 }
 
 .perm-icon {
@@ -389,6 +392,7 @@ html, body {
     flex-direction: column;
     gap: 0.15rem;
     flex-grow: 1;
+    min-width: 0;
 }
 
 .perm-name {
@@ -412,6 +416,8 @@ html, body {
     font-weight: 700;
     cursor: pointer;
     transition: all var(--transition-speed) ease;
+    white-space: nowrap;
+    margin-left: auto;
 }
 
 .btn-grant:hover {
@@ -475,7 +481,14 @@ html, body {
 }
 
 #blazor-error-ui {
+    display: none;
     background: rgba(22, 18, 42, 0.95);
     border-top: 1px solid var(--danger-border);
     color: var(--text-primary);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    padding: 0.6rem 1.25rem;
 }
